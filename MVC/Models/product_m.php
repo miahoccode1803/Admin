@@ -1,12 +1,12 @@
 <?php
 class product_m extends connectDB {
 
-    function product_ins($product_id,$name,$company,$img, $price,$screen,$os,$camera,$camera_front,$cpu,$ram,$rom,$microUSB,$battery) {
+    function product_ins($product_id, $name, $company, $img, $price, $quantity, $screen, $os, $camera, $camera_front, $cpu, $ram, $rom, $microUSB, $battery) {
         // Prepare SQL statements using Prepared Statements to prevent SQL Injection
-        $sql1 = "INSERT INTO Products (product_id, `name`, company, img, price) 
-                 VALUES (?, ?, ?, ?, ?)";
+        $sql1 = "INSERT INTO Products (product_id, `name`, company, img, price, quantity) 
+                 VALUES (?, ?, ?, ?, ?, ?)";
         $stmt1 = mysqli_prepare($this->con, $sql1);
-        mysqli_stmt_bind_param($stmt1, "sssss", $product_id, $name, $company, $img, $price);
+        mysqli_stmt_bind_param($stmt1, "ssssss", $product_id, $name, $company, $img, $price, $quantity);
         $result1 = mysqli_stmt_execute($stmt1);
 
         if ($result1) {
@@ -65,13 +65,13 @@ class product_m extends connectDB {
         return $result;
     }
 
-    function product_upd($product_id,$name,$company,$img, $price,$screen,$os,$camera,$camera_front,$cpu,$ram,$rom,$microUSB,$battery) {
+    function product_upd($product_id, $name, $company, $img, $price, $quantity, $screen, $os, $camera, $camera_front, $cpu, $ram, $rom, $microUSB, $battery) {
         // Use Prepared Statements to prevent SQL Injection
         $sql1 = "UPDATE Products 
-                 SET `name` = ?, company = ?, img = ?, price = ? 
+                 SET `name` = ?, company = ?, img = ?, price = ?, quantity = ? 
                  WHERE product_id = ?";
         $stmt1 = mysqli_prepare($this->con, $sql1);
-        mysqli_stmt_bind_param($stmt1, "sssss", $name, $company, $img, $price, $product_id);
+        mysqli_stmt_bind_param($stmt1, "ssssss", $name, $company, $img, $price, $quantity, $product_id);
         $result1 = mysqli_stmt_execute($stmt1);
     
         if ($result1) {
@@ -88,11 +88,10 @@ class product_m extends connectDB {
             return false;
         }
     }
-    
 
     function get_product_for_update_form($product_id) {
         // Use Prepared Statements to prevent SQL Injection
-        $sql = "SELECT p.product_id, p.name, p.company, p.img, p.price, pd.screen, pd.os, pd.camera, pd.camera_front, pd.cpu, pd.ram, pd.rom, pd.microUSB, pd.battery
+        $sql = "SELECT p.product_id, p.name, p.company, p.img, p.price, p.quantity, pd.screen, pd.os, pd.camera, pd.camera_front, pd.cpu, pd.ram, pd.rom, pd.microUSB, pd.battery
                 FROM Products p
                 LEFT JOIN ProductDetails pd ON p.product_id = pd.product_id
                 WHERE p.product_id = ?";
@@ -100,7 +99,7 @@ class product_m extends connectDB {
         $stmt = mysqli_prepare($this->con, $sql);
         mysqli_stmt_bind_param($stmt, "s", $product_id);
         mysqli_stmt_execute($stmt);
-        mysqli_stmt_bind_result($stmt, $product_id, $name, $company, $img, $price, $screen, $os, $camera, $camera_front, $cpu, $ram, $rom, $microUSB, $battery);
+        mysqli_stmt_bind_result($stmt, $product_id, $name, $company, $img, $price, $quantity, $screen, $os, $camera, $camera_front, $cpu, $ram, $rom, $microUSB, $battery);
     
         if (mysqli_stmt_fetch($stmt)) {
             $data = [
@@ -109,6 +108,7 @@ class product_m extends connectDB {
                 'company' => $company,
                 'img' => $img,
                 'price' => $price,
+                'quantity' => $quantity,
                 'screen' => $screen,
                 'os' => $os,
                 'camera' => $camera,
@@ -125,27 +125,25 @@ class product_m extends connectDB {
         }
     }
 
-    
-        function get_sales_and_revenue_by_company() {
-            // Query to get sales and revenue by company
-            $sql = "SELECT p.company, 
-                           SUM(od.quantity) as total_sales, 
-                           SUM(p.price * od.quantity) as total_revenue 
-                    FROM Products p
-                    JOIN OrderDetails od ON p.product_id = od.product_id
-                    GROUP BY p.company";
-            $result = mysqli_query($this->con, $sql);
-    
-            $data = [];
-            while ($row = mysqli_fetch_assoc($result)) {
-                // Format total_sales and total_revenue as numbers
-                $row['total_sales'] = intval($row['total_sales']);
-                $row['total_revenue'] = floatval($row['total_revenue']);
-                $data[] = $row;
-            }
-    
-            return $data;
-        }
-    }
+    function get_sales_and_revenue_by_company() {
+        // Query to get sales and revenue by company
+        $sql = "SELECT p.company, 
+                       SUM(od.quantity) as total_sales, 
+                       SUM(p.price * od.quantity) as total_revenue 
+                FROM Products p
+                JOIN OrderDetails od ON p.product_id = od.product_id
+                GROUP BY p.company";
+        $result = mysqli_query($this->con, $sql);
 
+        $data = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            // Format total_sales and total_revenue as numbers
+            $row['total_sales'] = intval($row['total_sales']);
+            $row['total_revenue'] = floatval($row['total_revenue']);
+            $data[] = $row;
+        }
+
+        return $data;
+    }
+}
 ?>

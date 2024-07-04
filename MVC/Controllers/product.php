@@ -14,6 +14,7 @@ class product extends controller {
 
     public function add() {
         $message = "";
+        $product_id = $name = $company = $img = $price = $screen = $os = $camera = $camera_front = $cpu = $ram = $rom = $microUSB = $battery = $quantity = "";
         if (isset($_POST["btnAdd"])) {
             $imgPath = "";
             // Kiểm tra nếu có tệp ảnh được tải lên
@@ -24,29 +25,30 @@ class product extends controller {
                 $imgPath = $fileName;
             }
             // Lấy dữ liệu từ form
-                $product_id = $_POST['txtproduct_id'];
-                $name = $_POST['txtname'];
-                $company = $_POST['sltcompany'];
-                $img = $imgPath;
-                $price = $_POST['txtprice'];
-                $screen = $_POST['txtscreen'];
-                $os = $_POST['txtos'];
-                $camera = $_POST['txtcamera'];
-                $camera_front = $_POST['txtcamera_front'];
-                $cpu = $_POST['txtcpu'];
-                $ram = $_POST['txtram'];
-                $rom = $_POST['txtrom'];
-                $microUSB = $_POST['txtmicroUSB'];
-                $battery = $_POST['txtbattery'];
-    
+            $product_id = $_POST['txtproduct_id'];
+            $name = $_POST['txtname'];
+            $company = $_POST['sltcompany'];
+            $img = $imgPath;
+            $price = $_POST['txtprice'];
+            $quantity = $_POST['txtquantity'];
+            $screen = $_POST['txtscreen'];
+            $os = $_POST['txtos'];
+            $camera = $_POST['txtcamera'];
+            $camera_front = $_POST['txtcamera_front'];
+            $cpu = $_POST['txtcpu'];
+            $ram = $_POST['txtram'];
+            $rom = $_POST['txtrom'];
+            $microUSB = $_POST['txtmicroUSB'];
+            $battery = $_POST['txtbattery'];
+
             // Kiểm tra trùng lặp product_id
             if ($this->lst_product->duplicateID($product_id)) {
                 // Thông báo lỗi nếu product_id đã tồn tại
                 $message = "Mã sản phẩm đã tồn tại. Vui lòng nhập mã sản phẩm khác.";
             } else {
                 // Gọi hàm product_ins để thêm sản phẩm
-                $result = $this->lst_product->product_ins($product_id,$name,$company,$img, $price,$screen,$os,$camera,$camera_front,$cpu,$ram,$rom,$microUSB,$battery);
-    
+                $result = $this->lst_product->product_ins($product_id, $name, $company, $img, $price, $quantity, $screen, $os, $camera, $camera_front, $cpu, $ram, $rom, $microUSB, $battery);
+
                 if ($result) {
                     // Thêm thành công
                     $message = "Thêm sản phẩm thành công.";
@@ -65,6 +67,7 @@ class product extends controller {
             'company'=> $company,
             'img'=> $img,
             'price'=> $price,
+            'quantity'=> $quantity,
             'screen'=> $screen,
             'os'=> $os,
             'camera'=> $camera,
@@ -76,8 +79,6 @@ class product extends controller {
             'battery'=> $battery
         ]);
     }
-    
-
-  
 }
+
 ?>

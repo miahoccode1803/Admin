@@ -78,6 +78,11 @@
                                 value="<?php if(isset($data['price'])) echo $data['price']?>" required></td>
                     </tr>
                     <tr>
+                        <td>Số lượng:</td>
+                        <td><input type="number" name="txtquantity"
+                                value="<?php if(isset($data['quantity'])) echo $data['quantity']?>" required></td>
+                    </tr>
+                    <tr>
                         <th colspan="2">Thông số kĩ thuật</th>
                     </tr>
                     <tr>

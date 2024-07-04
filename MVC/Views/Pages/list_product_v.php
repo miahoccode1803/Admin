@@ -7,7 +7,6 @@
     <title>Admin - Products</title>
     <link rel="stylesheet" href="http://localhost/meMe/Public/css/admin/style.css">
     <link rel="stylesheet" href="http://localhost/meMe/Public/css/admin/progress.css">
-
 </head>
 
 <style>
@@ -26,7 +25,6 @@
 }
 </style>
 
-
 <body>
     <button class="add">
         <a href="http://localhost/meMe/product" style=" text-decoration:none;color:white;">
@@ -43,6 +41,7 @@
                         <th title="Sắp xếp" style="width:fit-content">Tên <i class="fa fa-sort"></i></th>
                         <th title="Sắp xếp" style="width:fit-content">Giá <i class="fa fa-sort"></i></th>
                         <th title="Sắp xếp" style="width:fit-content">Hãng sản xuất <i class="fa fa-sort"></i></th>
+                        <th title="Sắp xếp" style="width:fit-content">Số lượng <i class="fa fa-sort"></i></th>
                         <th style="width: 15%">Hành động</th>
                     </tr>
                 </thead>
@@ -58,9 +57,9 @@
                         <td class="hideImg"><img class="hinhDaiDien"
                                 src="<?php echo "http://localhost/meMe/Public/img/products/".$row['img'] ?>"
                                 alt="Ảnh đại diện"><a href="#"><?php echo $row['name'] ?></a></td>
-
                         <td><?php echo $row['price'] ?></td>
                         <td><?php echo $row['company'] ?></td>
+                        <td><?php echo $row['quantity'] ?></td>
                         <td>
                             <a href="http://localhost/meMe/list_product/delete/<?php echo $row['product_id']?>"
                                 style=" text-decoration:none;color:white;float:left;padding-right:0px;margin-left:38%;"><i
