@@ -42,22 +42,13 @@ class list_product extends controller {
         if (isset($_FILES['product_image']) && $_FILES['product_image']['error'] === UPLOAD_ERR_OK) {
             $fileTmpPath = $_FILES['product_image']['tmp_name'];
             $fileName = $_FILES['product_image']['name'];
-            $uploadDir = 'img/products/'; // Thư mục lưu trữ ảnh trên server
-            $dest_path = $uploadDir . $fileName;
+
     
             // Tạo thư mục nếu chưa tồn tại
-            if (!is_dir($uploadDir)) {
-                mkdir($uploadDir, 0777, true);
+            if (!is_dir($fileName)) {
+                mkdir($fileName, 0777, true);
             }
-    
-            // Di chuyển tệp tải lên đến thư mục đích
-            if (move_uploaded_file($fileTmpPath, $dest_path)) {
-                $imgPath = $dest_path; // Đường dẫn lưu trữ ảnh
-            } else {
-                $message = "Tải lên hình ảnh thất bại.";
-            }
-        } else {
-            $imgPath = $_POST['txtimg']; // Giữ nguyên đường dẫn ảnh cũ nếu không có tệp mới
+                $imgPath = $fileName; // Đường dẫn lưu trữ ảnh
         }
     
         if (isset($_POST['btnUpdate'])) {
@@ -102,6 +93,7 @@ class list_product extends controller {
            'product' => $this->lst_product->get_product_for_update_form($product_id)
        ]);
     }
+
 public function delete($product_id) {
     // Gọi hàm product_del để xóa sản phẩm
     $result = $this->lst_product->product_del($product_id);
@@ -120,5 +112,7 @@ public function delete($product_id) {
         'message' => $message
     ]);
 }
+
+
 }
 ?>

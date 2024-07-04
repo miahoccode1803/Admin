@@ -56,8 +56,8 @@
                         <td><?php echo ++$i ?></td>
                         <td><?php echo $row['product_id'] ?></td>
                         <td class="hideImg"><img class="hinhDaiDien"
-                                src="<?php echo "http://localhost/meMe/Public/".$row['img'] ?>" alt="Ảnh đại diện"><a
-                                href="#"><?php echo $row['name'] ?></a></td>
+                                src="<?php echo "http://localhost/meMe/Public/img/products/".$row['img'] ?>"
+                                alt="Ảnh đại diện"><a href="#"><?php echo $row['name'] ?></a></td>
 
                         <td><?php echo $row['price'] ?></td>
                         <td><?php echo $row['company'] ?></td>

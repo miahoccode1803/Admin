@@ -50,7 +50,8 @@
                         <td>Hình:</td>
                         <td>
                             <img class="hinhDaiDien" id="anhDaiDienSanPhamThem" name="product_img"
-                                src="<?php echo "http://localhost/meMe/Public/".$row['img']; ?>" alt="Product Image">
+                                src="<?php echo "http://localhost/meMe/Public/img/products/".$row['img']; ?>"
+                                alt="Product Image">
                             <input type="file" name="product_image" accept="image/*" onchange="previewImage(this);">
                         </td>
                     </tr>

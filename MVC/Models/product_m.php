@@ -124,5 +124,28 @@ class product_m extends connectDB {
             return false;
         }
     }
-}
+
+    
+        function get_sales_and_revenue_by_company() {
+            // Query to get sales and revenue by company
+            $sql = "SELECT p.company, 
+                           SUM(od.quantity) as total_sales, 
+                           SUM(p.price * od.quantity) as total_revenue 
+                    FROM Products p
+                    JOIN OrderDetails od ON p.product_id = od.product_id
+                    GROUP BY p.company";
+            $result = mysqli_query($this->con, $sql);
+    
+            $data = [];
+            while ($row = mysqli_fetch_assoc($result)) {
+                // Format total_sales and total_revenue as numbers
+                $row['total_sales'] = intval($row['total_sales']);
+                $row['total_revenue'] = floatval($row['total_revenue']);
+                $data[] = $row;
+            }
+    
+            return $data;
+        }
+    }
+
 ?>

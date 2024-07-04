@@ -66,7 +66,7 @@
                         <td>Hình:
                         <td>
                             <img class="hinhDaiDien" id="anhDaiDienSanPhamThem" name="product_img"
-                                src="<?php echo isset($data['img']) ?"http://localhost/meMe/Public/". $data['img'] : ''; ?>"
+                                src="<?php echo isset($data['img']) ?"http://localhost/meMe/Public/img/products/". $data['img'] : ''; ?>"
                                 required>
                             <input type="file" name="img" accept="image/*" onchange="previewImage(this);">
                         </td>

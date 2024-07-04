@@ -21,7 +21,7 @@ class product extends controller {
                 // Tên của tệp ảnh
                 $fileName = $_FILES['img']['name'];
                 // Đường dẫn lưu tệp ảnh (tại thư mục img/products/)
-                $imgPath = 'img/products/' . $fileName;
+                $imgPath = $fileName;
             }
             // Lấy dữ liệu từ form
                 $product_id = $_POST['txtproduct_id'];

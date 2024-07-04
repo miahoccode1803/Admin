@@ -41,6 +41,9 @@
             <li class="nav-item"><a class="nav-link <?php echo ($data['page'] == 'list_account_v') ? 'active' : ''; ?>"
                     href="http://localhost/meMe/list_account" style="text-decoration:none;"><i
                         class="fa fa-address-book-o"></i> Khách Hàng</a></li>
+            <li class="nav-item"><a class="nav-link <?php echo ($data['page'] == 'import_export_v') ? 'active' : ''; ?>"
+                    href="http://localhost/meMe/import_export" style="text-decoration:none;"><i
+                        class="fa fa-upload"></i> Nhập/Xuất file</a></li>
             <li class="nav-item">
                 <hr>
             </li>
