@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý đơn hàng</title>
-    <link rel="stylesheet" href="http://localhost/meMe/Public/css/admin/style.css">
-    <link rel="stylesheet" href="http://localhost/meMe/Public/css/admin/progress.css">
+    <link rel="stylesheet" href="http://localhost/webproject/Public/Css/admin/style.css">
+    <link rel="stylesheet" href="http://localhost/webproject/Public/Css/admin/progress.css">
     <style>
     .x:hover {
         color: red;
@@ -17,7 +17,7 @@
 <body>
 
     <!-- Form tìm kiếm đơn hàng -->
-    <form id="orderSearchForm" action="http://localhost/meMe/list_order/find" method="POST">
+    <form id="orderSearchForm" action="http://localhost/webproject/list_order/find" method="POST">
         <div class="donhang">
             <table class="table-header">
                 <thead>
@@ -48,11 +48,11 @@
                         <td><?php echo $row['total'] ?></td>
                         <td>
                             <!-- Dấu tích để thay đổi trạng thái đơn hàng -->
-                            <a href="http://localhost/meMe/list_order/change_status/<?php echo $row['order_id'] ?>"
+                            <a href="http://localhost/webproject/list_order/change_status/<?php echo $row['order_id'] ?>"
                                 style=" text-decoration:none;color:white;float:left;padding-left:30px;padding-right:0px;"><i
                                     class="fa fa-check"></i></a>
                             <!-- Dấu X để xóa đơn hàng -->
-                            <a href="http://localhost/meMe/list_order/cancel_order/<?php echo $row['order_id'] ?>"
+                            <a href="http://localhost/webproject/list_order/cancel_order/<?php echo $row['order_id'] ?>"
                                 style=" text-decoration:none;color:white;float:left;padding-left:0px;padding-right:0px;"
                                 class="x"><i class="fa fa-times"></i></a>
                         </td>

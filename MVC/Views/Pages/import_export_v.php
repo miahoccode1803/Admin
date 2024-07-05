@@ -67,7 +67,7 @@
             <div class="form-container">
                 <h2>Nhập dữ liệu</h2>
                 <div class="form-group">
-                    <form id="importForm" action="http://localhost/meMe/import_export/importData" method="post"
+                    <form id="importForm" action="http://localhost/webproject/import_export/importData" method="post"
                         enctype="multipart/form-data">
                         <input type="file" id="dataFile" name="dataFile" accept=".xlsx" required>
                         <select name="table" id="table" required>
@@ -85,17 +85,17 @@
                 <h2>Xuất file</h2>
                 <h4> Chọn bảng để xuất file</h4>
                 <div class="form-group">
-                    <a href="http://localhost/meMe/import_export/exportData/customers" class="btn"><i
+                    <a href="http://localhost/webproject/import_export/exportData/customers" class="btn"><i
                             class="fa fa-download"></i> Khách
                         Hàng</a>
                 </div>
                 <div class="form-group">
-                    <a href="http://localhost/meMe/import_export/exportData/products" class="btn"><i
+                    <a href="http://localhost/webproject/import_export/exportData/products" class="btn"><i
                             class="fa fa-download"></i> Sản
                         Phẩm</a>
                 </div>
                 <div class="form-group">
-                    <a href="http://localhost/meMe/import_export/exportData/orders" class="btn"><i
+                    <a href="http://localhost/webproject/import_export/exportData/orders" class="btn"><i
                             class="fa fa-download"></i> Đơn
                         hàng</a>
                 </div>
