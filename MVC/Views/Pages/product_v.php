@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="http://localhost/webproject/Public/Css/admin/style.css">
-    <link rel="stylesheet" href="http://localhost/webproject/Public/Css/admin/progress.css">
+    <link rel="stylesheet" href="http://localhost/Admin/Public/Css/admin/style.css">
+    <link rel="stylesheet" href="http://localhost/Admin/Public/Css/admin/progress.css">
     <script>
     function previewImage(input) {
         if (input.files && input.files[0]) {
@@ -23,10 +23,10 @@
 </head>
 
 <body>
-    <form method="POST" action="http://localhost/webproject/product/add" enctype="multipart/form-data">
+    <form method="POST" action="http://localhost/Admin/product/add" enctype="multipart/form-data">
         <div id="khungThemSanPham" style="width:max-content;margin:auto">
             <div class="overlayTable table-outline table-content table-header">
-                <a href="http://localhost/webproject/list_product"><span class="close">&times;</span></a>
+                <a href="http://localhost/Admin/list_product"><span class="close">&times;</span></a>
                 <table>
                     <tr>
                         <th colspan="2">Thêm Sản Phẩm</th>
@@ -59,7 +59,7 @@
                         <td>Hình:
                         <td>
                             <img class="hinhDaiDien" id="anhDaiDienSanPhamThem" name="product_img"
-                                src="<?php echo isset($data['img']) ?"http://localhost/webproject/Public/Picture/Products/". $data['img'] : ''; ?>"
+                                src="<?php echo isset($data['img']) ?"http://localhost/Admin/Public/Picture/Products/". $data['img'] : ''; ?>"
                                 required>
                             <input type="file" name="img" accept="image/*" onchange="previewImage(this);">
                         </td>

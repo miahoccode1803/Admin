@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cập Nhật Nhà Cung Cấp</title>
-    <link rel="stylesheet" href="http://localhost/webproject/Public/Css/admin/style.css">
+    <link rel="stylesheet" href="http://localhost/Admin/Public/Css/admin/style.css">
 </head>
 
 <body>
-    <form method="POST" action="http://localhost/webproject/list_supplier/update_data">
+    <form method="POST" action="http://localhost/Admin/list_supplier/update_data">
         <div id="khungCapNhatNhaCungCap" style="width:max-content;margin:auto">
             <div class="overlayTable table-outline table-content table-header">
-                <a href="http://localhost/webproject/list_supplier"><span class="close">&times;</span></a>
+                <a href="http://localhost/Admin/list_supplier"><span class="close">&times;</span></a>
                 <table>
                     <tr>
                         <th colspan="2">Cập Nhật Nhà Cung Cấp</th>

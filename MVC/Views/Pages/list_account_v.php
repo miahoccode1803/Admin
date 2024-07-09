@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý khách hàng</title>
 
-    <link rel="stylesheet" href="http://localhost/webproject/Public/Css/admin/style.css">
-    <link rel="stylesheet" href="http://localhost/webproject/Public/Css/admin/progress.css">
+    <link rel="stylesheet" href="http://localhost/Admin/Public/Css/admin/style.css">
+    <link rel="stylesheet" href="http://localhost/Admin/Public/Css/admin/progress.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!-- Load font awesome icons -->
@@ -35,7 +35,7 @@
 </head>
 
 <body>
-    <form action="http://localhost/webproject/list_account/find" method="POST">
+    <form action="http://localhost/Admin/list_account/find" method="POST">
         <div class="khachhang">
             <table class="table-header">
                 <thead>
@@ -70,7 +70,7 @@
                                 <i class="fas fa-toggle-off"></i>
                                 <?php endif; ?>
                             </a>
-                            <a href="http://localhost/webproject/list_account/delete/<?php echo $row['username'] ?>"
+                            <a href="http://localhost/Admin/list_account/delete/<?php echo $row['username'] ?>"
                                 onclick=" confirmDelete('<?php echo $row['username']?>')"
                                 style="text-decoration:none;color:white;float:left;padding-left:0px;padding-right:0px;"><i
                                     class="fa fa-remove"></i></a>
@@ -105,13 +105,13 @@
     function confirmToggleStatus(username, currentStatus) {
         var confirmation = confirm("Bạn có chắc chắn muốn " + (currentStatus ? "tắt" : "bật") + " tài khoản này?");
         if (confirmation) {
-            window.location.href = "http://localhost/webproject/list_account/toggleStatus/" + username;
+            window.location.href = "http://localhost/Admin/list_account/toggleStatus/" + username;
         }
     }
 
     function confirmDelete(username) {
         if (confirm("Bạn có chắc chắn muốn xóa tài khoản này và tất cả đơn hàng liên quan tới tài khoản này không?")) {
-            window.location.href = "http://localhost/webproject/list_account/delete/" + username;
+            window.location.href = "http://localhost/Admin/list_account/delete/" + username;
         }
     }
     </script>

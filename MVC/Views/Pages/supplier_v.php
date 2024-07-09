@@ -5,15 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thêm Nhà Cung Cấp</title>
-    <link rel="stylesheet" href="http://localhost/webproject/Public/css/admin/style.css">
-    <link rel="stylesheet" href="http://localhost/webproject/Public/css/admin/progress.css">
+    <link rel="stylesheet" href="http://localhost/Admin/Public/css/admin/style.css">
+    <link rel="stylesheet" href="http://localhost/Admin/Public/css/admin/progress.css">
 </head>
 
 <body>
-    <form method="POST" action="http://localhost/webproject/list_supplier/add">
+    <form method="POST" action="http://localhost/Admin/list_supplier/add">
         <div id="khungThemNhaCungCap" style="width:max-content;margin:auto">
             <div class="overlayTable table-outline table-content table-header">
-                <a href="http://localhost/webproject/list_supplier"><span class="close">&times;</span></a>
+                <a href="http://localhost/Admin/list_supplier"><span class="close">&times;</span></a>
                 <table>
                     <tr>
                         <th colspan="2">Thêm Nhà Cung Cấp</th>

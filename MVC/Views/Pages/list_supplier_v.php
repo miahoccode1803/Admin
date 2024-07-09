@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danh sách nhà cung cấp</title>
-    <link rel="stylesheet" href="http://localhost/webproject/Public/Css/admin/style.css">
-    <link rel="stylesheet" href="http://localhost/webproject/Public/Css/admin/progress.css">
+    <link rel="stylesheet" href="http://localhost/Admin/Public/Css/admin/style.css">
+    <link rel="stylesheet" href="http://localhost/Admin/Public/Css/admin/progress.css">
 </head>
 <style>
 .add {
@@ -26,11 +26,11 @@
 
 <body>
     <button class="add">
-        <a href="http://localhost/webproject/supplier" style=" text-decoration:none;color:white;">
+        <a href="http://localhost/Admin/supplier" style=" text-decoration:none;color:white;">
             <i class="fa fa-plus-square">Thêm nhà cung cấp</i>
         </a>
     </button>
-    <form method="POST" action="http://localhost/webproject/list_supplier/search">
+    <form method="POST" action="http://localhost/Admin/list_supplier/search">
         <div class="sanpham">
             <table class="table-header" style="overflow:auto;">
                 <thead>
@@ -58,10 +58,10 @@
                         <td><?php echo htmlspecialchars($row['contact_email']); ?></td>
                         <td><?php echo htmlspecialchars($row['address']); ?></td>
                         <td>
-                            <a href="http://localhost/webproject/list_supplier/delete/<?php echo $row['name']?>"
+                            <a href="http://localhost/Admin/list_supplier/delete/<?php echo $row['name']?>"
                                 style=" text-decoration:none;color:white;float:left;padding-right:0px;margin-left:38%;"><i
                                     class="fa fa-trash"></i></a><a
-                                href="http://localhost/webproject/list_supplier/update/<?php echo $row['name']?>"
+                                href="http://localhost/Admin/list_supplier/update/<?php echo $row['name']?>"
                                 style=" text-decoration:none;color:white;float:left;padding-left:0px;padding-right:0px;"><i
                                     class="fa fa-wrench"></i></a>
                         </td>

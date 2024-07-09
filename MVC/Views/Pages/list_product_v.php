@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Products</title>
-    <link rel="stylesheet" href="http://localhost/webproject/Public/Css/admin/style.css">
-    <link rel="stylesheet" href="http://localhost/webproject/Public/Css/admin/progress.css">
+    <link rel="stylesheet" href="http://localhost/Admin/Public/Css/admin/style.css">
+    <link rel="stylesheet" href="http://localhost/Admin/Public/Css/admin/progress.css">
 </head>
 
 <style>
@@ -27,11 +27,11 @@
 
 <body>
     <button class="add">
-        <a href="http://localhost/webproject/product" style=" text-decoration:none;color:white;">
+        <a href="http://localhost/Admin/product" style=" text-decoration:none;color:white;">
             <i class="fa fa-plus-square">Thêm sản phẩm</i>
         </a>
     </button>
-    <form method="post" action="http://localhost/webproject/list_product/find">
+    <form method="post" action="http://localhost/Admin/list_product/find">
         <div class="sanpham">
             <table class="table-header" style="overflow:auto;">
                 <thead>
@@ -55,16 +55,16 @@
                         <td><?php echo ++$i ?></td>
                         <td><?php echo $row['product_id'] ?></td>
                         <td class="hideImg"><img class="hinhDaiDien"
-                                src="<?php echo "http://localhost/webproject/Public/Picture/products/".$row['img'] ?>"
+                                src="<?php echo "http://localhost/Admin/Public/Picture/Products/".$row['img'] ?>"
                                 alt="Ảnh đại diện"><a href="#"><?php echo $row['name'] ?></a></td>
                         <td><?php echo $row['price'] ?></td>
                         <td><?php echo $row['company'] ?></td>
                         <td><?php echo $row['quantity'] ?></td>
                         <td>
-                            <a href="http://localhost/webproject/list_product/delete/<?php echo $row['product_id']?>"
+                            <a href="http://localhost/Admin/list_product/delete/<?php echo $row['product_id']?>"
                                 style=" text-decoration:none;color:white;float:left;padding-right:0px;margin-left:38%;"><i
                                     class="fa fa-trash"></i></a><a
-                                href="http://localhost/webproject/list_product/update/<?php echo $row['product_id']?>"
+                                href="http://localhost/Admin/list_product/update/<?php echo $row['product_id']?>"
                                 style=" text-decoration:none;color:white;float:left;padding-left:0px;padding-right:0px;"><i
                                     class="fa fa-wrench"></i></a>
                         </td>

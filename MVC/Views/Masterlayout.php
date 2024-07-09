@@ -17,8 +17,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 
     <!-- Our files -->
-    <link rel="stylesheet" href="http://localhost/webproject/Public/Css/admin/style.css">
-    <link rel="stylesheet" href="http://localhost/webproject/Public/Css/admin/progress.css">
+    <link rel="stylesheet" href="http://localhost/Admin/Public/Css/admin/style.css">
+    <link rel="stylesheet" href="http://localhost/Admin/Public/Css/admin/progress.css">
 </head>
 
 <body>
@@ -31,21 +31,21 @@
         <ul class="nav">
             <li class="nav-title">MENU</li>
             <li class="nav-item"><a class="nav-link <?php echo ($data['page'] == 'home_v') ? 'active' : ''; ?>"
-                    href="http://localhost/webproject/home"><i class="fa fa-home"></i>
+                    href="http://localhost/Admin/home"><i class="fa fa-home"></i>
                     Trang Chủ</a></li>
             <li class="nav-item"><a class="nav-link <?php echo ($data['page'] == 'list_product_v') ? 'active' : ''; ?>"
-                    href="http://localhost/webproject/list_product"><i class="fa fa-th-large"></i> Sản Phẩm</a>
+                    href="http://localhost/Admin/list_product"><i class="fa fa-th-large"></i> Sản Phẩm</a>
             </li>
             <li class="nav-item"><a class="nav-link <?php echo ($data['page'] == 'list_order_v') ? 'active' : ''; ?>"
-                    href="http://localhost/webproject/list_order"><i class="fa fa-file-text-o"></i> Đơn Hàng</a></li>
+                    href="http://localhost/Admin/list_order"><i class="fa fa-file-text-o"></i> Đơn Hàng</a></li>
             <li class="nav-item"><a class="nav-link <?php echo ($data['page'] == 'list_account_v') ? 'active' : ''; ?>"
-                    href="http://localhost/webproject/list_account" style="text-decoration:none;"><i
+                    href="http://localhost/Admin/list_account" style="text-decoration:none;"><i
                         class="fa fa-address-book-o"></i> Tài Khoản </a></li>
             <li class="nav-item"><a class="nav-link <?php echo ($data['page'] == 'import_export_v') ? 'active' : ''; ?>"
-                    href="http://localhost/webproject/import_export" style="text-decoration:none;"><i
+                    href="http://localhost/Admin/import_export" style="text-decoration:none;"><i
                         class="fa fa-upload"></i> Nhập/Xuất file</a></li>
             <li class="nav-item"><a class="nav-link <?php echo ($data['page'] == 'list_supplier') ? 'active' : ''; ?>"
-                    href="http://localhost/webproject/list_supplier" style="text-decoration:none;"><i
+                    href="http://localhost/Admin/list_supplier" style="text-decoration:none;"><i
                         class="fa fa-address-book-o"></i> Nhà cung cấp</a></li>
             <li class="nav-item">
                 <hr>
