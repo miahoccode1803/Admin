@@ -23,15 +23,15 @@ class product extends controller {
         if (isset($_POST["btnAdd"])) {
             $imgPath = "";
             // Check if an image file is uploaded
-            if (isset($_FILES['img'])) {
-                $fileName = $_FILES['img']['name'];
-                $imgPath = $fileName; // Set the image path (assuming it's saved in img/products/)
+            if (isset($_FILES['img']) && $_FILES['img']['error'] == 0) {
+                $fileName = basename($_FILES['img']['name']);
+
             }
             // Get form data
             $product_id = $_POST['txtproduct_id'];
             $name = $_POST['txtname'];
             $company = $_POST['sltcompany'];
-            $img = $imgPath;
+            $img =  $fileName;
             $price = $_POST['txtprice'];
             $quantity = $_POST['txtquantity'];
             $screen = $_POST['txtscreen'];
@@ -66,7 +66,7 @@ class product extends controller {
             'product_id'=> $product_id,
             'name'=> $name,
             'company'=> $company,
-            'img'=> $img,
+            'img'=>  $fileName,
             'price'=> $price,
             'quantity'=> $quantity,
             'screen'=> $screen,

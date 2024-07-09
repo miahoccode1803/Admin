@@ -59,7 +59,7 @@
                         <td>Hình:
                         <td>
                             <img class="hinhDaiDien" id="anhDaiDienSanPhamThem" name="product_img"
-                                src="<?php echo isset($data['img']) ?"http://localhost/webproject/Public/Picture/products/". $data['img'] : ''; ?>"
+                                src="<?php echo isset($data['img']) ?"http://localhost/webproject/Public/Picture/Products/". $data['img'] : ''; ?>"
                                 required>
                             <input type="file" name="img" accept="image/*" onchange="previewImage(this);">
                         </td>
@@ -115,3 +115,28 @@
                     </tr>
                     <tr>
                         <td>Thẻ nhớ:</td>
+                        <td><input type="text" name="txtmicroUSB"
+                                value="<?php if(isset($data['microUSB'])) echo $data['microUSB']?>" required></td>
+                    </tr>
+                    <tr>
+                        <td>Pin:</td>
+                        <td><input type="text" name="txtbattery"
+                                value="<?php if(isset($data['battery'])) echo $data['battery']?>" required></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <button type="submit" name="btnAdd">Thêm sản phẩm</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </form>
+    <?php if (!empty($data['message'])): ?>
+    <script>
+    alert('<?php echo $data['message']; ?>');
+    </script>
+    <?php endif; ?>
+</body>
+
+</html>

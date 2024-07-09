@@ -40,7 +40,7 @@
                     href="http://localhost/webproject/list_order"><i class="fa fa-file-text-o"></i> Đơn Hàng</a></li>
             <li class="nav-item"><a class="nav-link <?php echo ($data['page'] == 'list_account_v') ? 'active' : ''; ?>"
                     href="http://localhost/webproject/list_account" style="text-decoration:none;"><i
-                        class="fa fa-address-book-o"></i> Khách Hàng</a></li>
+                        class="fa fa-address-book-o"></i> Tài Khoản </a></li>
             <li class="nav-item"><a class="nav-link <?php echo ($data['page'] == 'import_export_v') ? 'active' : ''; ?>"
                     href="http://localhost/webproject/import_export" style="text-decoration:none;"><i
                         class="fa fa-upload"></i> Nhập/Xuất file</a></li>

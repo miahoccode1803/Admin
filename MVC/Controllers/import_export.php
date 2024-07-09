@@ -9,158 +9,65 @@ class import_export extends controller {
         ]);
     }
 
+    
     public function importData() {
-        if (isset($_FILES['dataFile']) && $_FILES['dataFile']['error'] == 0 && isset($_POST['table'])) {
-            $file = $_FILES['dataFile']['tmp_name'];
-            $table = $_POST['table']; // Get the selected table name
-            
-            require './Public/Classes/PHPExcel.php';
-            $objPHPExcel = PHPExcel_IOFactory::load($file);
-    
-            $sheet = $objPHPExcel->getSheet(0);
-            $highestRow = $sheet->getHighestRow();
-            $highestColumn = $sheet->getHighestColumn();
-    
-            $data = [];
-            for ($row = 2; $row <= $highestRow; $row++) { // Bỏ qua hàng tiêu đề
-                $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
-                $data[] = $rowData[0];
-            }
-    
-            // Thực hiện việc lưu dữ liệu vào cơ sở dữ liệu dựa trên tên bảng
-            if ($this->saveToDatabase($table, $data)) {
-                $message = 'Data imported successfully!';
+        require './Public/Classes/PHPExcel.php';
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_FILES['dataFile']['tmp_name']) && !empty($_FILES['dataFile']['tmp_name'])) {
+                $file = $_FILES['dataFile']['tmp_name'];
+                $table = $_POST['table'];
+
+                $objPHPExcel = PHPExcel_IOFactory::load($file);
+                $sheet = $objPHPExcel->getActiveSheet();
+                $data = $sheet->toArray(null, true, true, true);
+
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "quanlydt";
+                
+                $conn = new mysqli($servername, $username, $password, $dbname);
+
+                if ($conn->connect_error) {
+                    die("Kết nối thất bại: " . $conn->connect_error);
+                }
+
+                // Giả sử hàng đầu tiên chứa tên cột
+                $columns = array_shift($data);
+                $columnsString = implode(", ", $columns);
+
+                foreach ($data as $row) {
+                    $values = array_map(function($value) use ($conn) {
+                        return "'" . $conn->real_escape_string($value) . "'";
+                    }, $row);
+                    $valuesString = implode(", ", $values);
+
+                    if ($table === 'customers') {
+                        $sql = "INSERT INTO customers ($columnsString) VALUES ($valuesString)";
+                    } elseif ($table === 'products') {
+                        $sql = "INSERT INTO products ($columnsString) VALUES ($valuesString)";
+                    } elseif ($table === 'orders') {
+                        $sql = "INSERT INTO orders ($columnsString) VALUES ($valuesString)";
+                    } elseif ($table === 'suppliers') {
+                        $sql = "INSERT INTO suppliers ($columnsString) VALUES ($valuesString)";
+                    }
+
+                    if (!$conn->query($sql)) {
+                        echo "Lỗi: " . $sql . "<br>" . $conn->error;
+                    }
+                }
+
+                $conn->close();
+                echo "Dữ liệu đã được import thành công!";
             } else {
-                $message = 'Failed to import data!';
+                echo "Chưa chọn tệp!";
             }
         } else {
-            $message = 'File upload failed!';
+            echo "Invalid request method.";
         }
-        header('Location: /import_export/Get_data?message=' . urlencode($message));
     }
-
-    private function saveToDatabase($table, $data) {
-        // Kết nối cơ sở dữ liệu
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "quanlydt";
-        
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        
-        if ($conn->connect_error) {
-            return false;
-        }
-
-        $success = true;
-
-        // Lưu dữ liệu vào cơ sở dữ liệu (thực hiện các câu lệnh SQL ở đây dựa vào $table)
-
-        // Example SQL insertion for customers table
-        if ($table === 'customers') {
-            foreach ($data as $row) {
-                $name = $row[0]; // Assuming the structure of your data
-                $email = $row[1];
-                $username = $row[2];
-                $password = $row[3];
-                $is_active = $row[4];
-                
-                // Example SQL query
-                $sql = "INSERT INTO customers (`name`, `email`, `username`, `password`, `is_active`) VALUES ('$name', '$email', '$username', '$password', '$is_active')";
-                if (!$conn->query($sql)) {
-                    $success = false;
-                    break;
-                }
-            }
-        }
-        
-        else if ($table === 'products') {
-            foreach ($data as $row) {
-                $product_id = $row[0]; // Assuming the structure of your data
-                $name = $row[1];
-                $company = $row[2];
-                $img = $row[3];
-                $price = $row[4];
-                $screen = $row[5];
-                $os = $row[6];
-                $camera = $row[7];
-                $camera_front = $row[8];
-                $cpu = $row[9];
-                $ram = $row[10];
-                $rom = $row[11];
-                $microUSB = $row[12];
-                $battery = $row[13];
     
-                // Example SQL query
-                $sql = "INSERT INTO Products (product_id, `name`, company, img, price) 
-                        VALUES ('$product_id', '$name', '$company', '$img', '$price')";
-                if (!$conn->query($sql)) {
-                    $success = false;
-                    break;
-                }
-    
-                // Insert into ProductDetails table
-                $sql2 = "INSERT INTO ProductDetails (product_id, screen, os, camera, camera_front, cpu, ram, rom, microUSB, battery) 
-                         VALUES ('$product_id', '$screen', '$os', '$camera', '$camera_front', '$cpu', '$ram', '$rom', '$microUSB', '$battery')";
-                if (!$conn->query($sql2)) {
-                    $success = false;
-                    break;
-                }
-            }
-        }
-            else if ($table === 'orders') {
-                foreach ($data as $row) {
-                    $order_id = $row[0]; // Assuming the structure of your data
-                    $customer_id = $row[1]; // Assuming customer_id
-                    $order_date = $row[2];
-                    $status = $row[3];
-                    
-                    // Example SQL query for orders table
-                    $sql = "INSERT INTO orders (order_id, customer_id, order_date, status) 
-                            VALUES ('$order_id', '$customer_id', '$order_date', '$status')";
-                    if (!$conn->query($sql)) {
-                        $success = false;
-                        break;
-                    }
-                    
-                    // Insert order details if available
-                    if (isset($row[4])) {
-                        $products = explode(',', $row[4]); // Assuming products are comma-separated
-                        foreach ($products as $product) {
-                            // Parse product details (e.g., product_name (quantity x price))
-                            $pattern = '/^(.*?) \((.*?) x (.*?)\)$/';
-                            preg_match($pattern, $product, $matches);
-                            
-                            if (count($matches) == 4) {
-                                $product_name = trim($matches[1]);
-                                $quantity = trim($matches[2]);
-                                $price = trim($matches[3]);
-                                
-                                // Retrieve product_id from products table
-                                $product_sql = "SELECT product_id FROM products WHERE name = '$product_name'";
-                                $product_result = $conn->query($product_sql);
-                                
-                                if ($product_result->num_rows > 0) {
-                                    $product_row = $product_result->fetch_assoc();
-                                    $product_id = $product_row['product_id'];
-                                    
-                                    // Insert into orderdetails table
-                                    $orderdetail_sql = "INSERT INTO orderdetails (order_id, product_id, quantity, price) 
-                                                        VALUES ('$order_id', '$product_id', '$quantity', '$price')";
-                                    if (!$conn->query($orderdetail_sql)) {
-                                        $success = false;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-        }
-
-        $conn->close();
-        return $success;
-    }
 
     public function exportData($table) {
         require './Public/Classes/PHPExcel.php';
@@ -230,6 +137,18 @@ class import_export extends controller {
                     $data[] = [$row['order_id'], $row['customer_name'], $row['order_date'], $row['status'], $row['products'], $row['total']];
                 }
             }
+        } elseif ($table === 'suppliers') {
+            $title = 'Bảng Nhà Cung Cấp';
+            $mergeRange = 'A1:E1'; // Merge từ cột A đến cột E
+            $sql = "SELECT `name`, `contact_name`, `contact_email`, `address`, `contact_phone` FROM suppliers";
+            $result = $conn->query($sql);
+            $data[] = ['Name', 'Contact Name', 'Contact Email', 'Address', 'Contact Phone'];
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = [$row['name'], $row['contact_name'], $row['contact_email'], $row['address'], $row['contact_phone']];
+                }
+            }
         }
 
         // Thêm tiêu đề bảng
@@ -294,4 +213,5 @@ class import_export extends controller {
         exit;
     }
 }
+
 ?>
