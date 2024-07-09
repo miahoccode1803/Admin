@@ -35,6 +35,7 @@
             <table class="table-header" style="overflow:auto;">
                 <thead>
                     <tr>
+                        <th>STT</th>
                         <th>Tên</th>
                         <th>Người liên hệ</th>
                         <th>Điện thoại</th>
@@ -46,9 +47,11 @@
                 <tbody class="table-content">
                     <?php 
                         if (isset($data['data']) && !empty($data['data'])) {
+                            $i=0;
                             while ($row = mysqli_fetch_assoc($data['data'])) {
                         ?>
                     <tr>
+                        <td><?php echo ++$i ?></td>
                         <td><?php echo htmlspecialchars($row['name']); ?></td>
                         <td><?php echo htmlspecialchars($row['contact_name']); ?></td>
                         <td><?php echo htmlspecialchars($row['contact_phone']); ?></td>
@@ -96,11 +99,17 @@
                         <i class="fa fa-search"></i>
                         Tìm kiếm
                     </button>
+
                 </div>
             </table>
         </div>
         </div>
     </form>
+    <?php if (!empty($data['message'])): ?>
+    <script>
+    alert('<?php echo $data['message']; ?>');
+    </script>
+    <?php endif; ?>S
 </body>
 
 </html>

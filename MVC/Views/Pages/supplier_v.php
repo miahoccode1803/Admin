@@ -20,23 +20,29 @@
                     </tr>
                     <tr>
                         <td>Tên nhà cung cấp:</td>
-                        <td><input type="text" name="name" required></td>
+                        <td><input type="text" name="name"
+                                value="<?php echo isset($_POST['name']) ? $_POST['name'] : ''; ?>" required></td>
                     </tr>
                     <tr>
                         <td>Tên liên hệ:</td>
-                        <td><input type="text" name="contact_name" required></td>
+                        <td><input type="text" name="contact_name"
+                                value="<?php echo isset($_POST['contact_name']) ? $_POST['contact_name'] : ''; ?>"
+                                required></td>
                     </tr>
                     <tr>
                         <td>Địa chỉ:</td>
-                        <td><input type="text" name="address" required></td>
+                        <td><input type="text" name="address"
+                                value="<?php echo isset($_POST['address']) ? $_POST['address'] : ''; ?>" required></td>
                     </tr>
                     <tr>
                         <td>Số điện thoại:</td>
-                        <td><input type="text" name="phone" required></td>
+                        <td><input type="text" name="phone"
+                                value="<?php echo isset($_POST['phone']) ? $_POST['phone'] : ''; ?>" required></td>
                     </tr>
                     <tr>
                         <td>Email:</td>
-                        <td><input type="email" name="email" required></td>
+                        <td><input type="email" name="email"
+                                value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>" required></td>
                     </tr>
                     <tr>
                         <td colspan="2" class="table-footer">

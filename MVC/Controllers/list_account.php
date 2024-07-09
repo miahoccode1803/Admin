@@ -49,7 +49,7 @@ class list_account extends controller {
             $message = "Cập nhật trạng thái thất bại: " . $e->getMessage();
         }
 
-        // Reload the list view with updated data
+        
         $dulieu = $this->lst_account->account_find('', '', '');
         $this->view('Masterlayout', [
             'dulieu' => $dulieu,
@@ -66,7 +66,7 @@ class list_account extends controller {
             $message = "Xóa tài khoản thất bại: " . $e->getMessage();
         }
 
-        // Reload the list view with updated data
+       
         $dulieu = $this->lst_account->account_find('', '', '');
         $this->view('Masterlayout', [
             'dulieu' => $dulieu,

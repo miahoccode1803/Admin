@@ -45,23 +45,16 @@
                         <td>Hãng:</td>
                         <td>
                             <select name="sltcompany">
-                                <script>
-                                var company = ["Apple", "Samsung", "Oppo", "Nokia", "Huawei", "Xiaomi", "Realme",
-                                    "Vivo", "Philips", "Mobell", "Mobiistar", "Itel", "Coolpad", "HTC", "Motorola"
-                                ];
-                                var selectedCompany = '<?php echo isset($_POST["company"]) ? $_POST["company"] : "" ?>';
-                                for (var c of company) {
-                                    if (c === selectedCompany) {
-                                        document.writeln(`<option value="` + c + `" selected>` + c + `</option>`);
-                                    } else {
-                                        document.writeln(`<option value="` + c + `">` + c + `</option>`);
-                                    }
-                                }
-                                </script>
+                                <?php if (isset($data['companies']) && is_array($data['companies'])): ?>
+                                <?php foreach($data['companies'] as $company): ?>
+                                <option value="<?php echo htmlspecialchars($company); ?>">
+                                    <?php echo htmlspecialchars($company); ?>
+                                </option>
+                                <?php endforeach; ?>
+                                <?php endif; ?>
                             </select>
                         </td>
                     </tr>
-                    <tr>
                     <tr>
                         <td>Hình:
                         <td>
@@ -70,7 +63,6 @@
                                 required>
                             <input type="file" name="img" accept="image/*" onchange="previewImage(this);">
                         </td>
-                    </tr>
                     </tr>
                     <tr>
                         <td>Giá tiền:</td>
@@ -123,29 +115,3 @@
                     </tr>
                     <tr>
                         <td>Thẻ nhớ:</td>
-                        <td><input type="text" name="txtmicroUSB"
-                                value="<?php if(isset($data['microUSB'])) echo $data['microUSB']?>" required></td>
-                    </tr>
-                    <tr>
-                        <td>Dung lượng Pin:</td>
-                        <td><input type="text" name="txtbattery"
-                                value="<?php if(isset($data['battery'])) echo $data['battery']?>" required></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="table-footer">
-                            <button name="btnAdd">THÊM</button>
-                        </td>
-                    </tr>
-                </table>
-                <?php if (!empty($data['message'])): ?>
-                <script>
-                alert('<?php echo $data['message']; ?>');
-                </script>
-                <?php endif; ?>
-            </div>
-        </div>
-
-    </form>
-</body>
-
-</html>

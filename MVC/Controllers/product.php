@@ -7,24 +7,27 @@ class product extends controller {
     }
 
     public function Get_data() {
+        $companies = $this->lst_product->getUniqueCompanies(); // Lấy danh sách các công ty
+    
         $this->view('Masterlayout', [
-            'page' => 'product_v'
+            'page' => 'product_v',
+            'companies' => $companies // Truyền dữ liệu công ty vào view
         ]);
     }
 
     public function add() {
         $message = "";
         $product_id = $name = $company = $img = $price = $screen = $os = $camera = $camera_front = $cpu = $ram = $rom = $microUSB = $battery = $quantity = "";
+        $companies = $this->lst_product->getUniqueCompanies(); // Fetch list of companies
+
         if (isset($_POST["btnAdd"])) {
             $imgPath = "";
-            // Kiểm tra nếu có tệp ảnh được tải lên
+            // Check if an image file is uploaded
             if (isset($_FILES['img'])) {
-                // Tên của tệp ảnh
                 $fileName = $_FILES['img']['name'];
-                // Đường dẫn lưu tệp ảnh (tại thư mục img/products/)
-                $imgPath = $fileName;
+                $imgPath = $fileName; // Set the image path (assuming it's saved in img/products/)
             }
-            // Lấy dữ liệu từ form
+            // Get form data
             $product_id = $_POST['txtproduct_id'];
             $name = $_POST['txtname'];
             $company = $_POST['sltcompany'];
@@ -41,24 +44,22 @@ class product extends controller {
             $microUSB = $_POST['txtmicroUSB'];
             $battery = $_POST['txtbattery'];
 
-            // Kiểm tra trùng lặp product_id
+            // Check for duplicate product_id
             if ($this->lst_product->duplicateID($product_id)) {
-                // Thông báo lỗi nếu product_id đã tồn tại
                 $message = "Mã sản phẩm đã tồn tại. Vui lòng nhập mã sản phẩm khác.";
             } else {
-                // Gọi hàm product_ins để thêm sản phẩm
+                // Call product_ins method to add product
                 $result = $this->lst_product->product_ins($product_id, $name, $company, $img, $price, $quantity, $screen, $os, $camera, $camera_front, $cpu, $ram, $rom, $microUSB, $battery);
 
                 if ($result) {
-                    // Thêm thành công
                     $message = "Thêm sản phẩm thành công.";
                 } else {
-                    // Thêm thất bại
                     $message = "Thêm sản phẩm thất bại. Vui lòng thử lại.";
                 }
             }
         }
-        // Hiển thị form thêm sản phẩm cùng với thông báo
+
+        // Display the add product form with message and company list
         $this->view('Masterlayout', [
             'page' => 'product_v',
             'message' => $message,
@@ -76,9 +77,9 @@ class product extends controller {
             'ram'=> $ram,
             'rom'=> $rom,
             'microUSB'=> $microUSB,
-            'battery'=> $battery
+            'battery'=> $battery,
+            'companies' => $companies // Pass companies data to the view
         ]);
     }
 }
-
 ?>

@@ -145,5 +145,28 @@ class product_m extends connectDB {
 
         return $data;
     }
+
+
+    function getUniqueCompanies() {
+        $sql = "SELECT `name` FROM Suppliers";
+        $result = mysqli_query($this->con, $sql);
+    
+        // Check if query was successful
+        if (!$result) {
+            die('Query error: ' . mysqli_error($this->con));
+        }
+    
+        $companies = array();
+    
+        // Fetch associative array
+        while ($row = mysqli_fetch_assoc($result)) {
+            $companies[] = $row['name']; // Add each company name to the array
+        }
+    
+        // Free result set
+        mysqli_free_result($result);
+    
+        return $companies;
+    }
 }
 ?>
