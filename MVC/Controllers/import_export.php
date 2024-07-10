@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ERROR | E_PARSE);
 class import_export extends controller {
     public function __construct() {
     }
@@ -10,13 +11,12 @@ class import_export extends controller {
     }
 
     
-    public function importData() {
+    public function importData($table) {
         require './Public/Classes/PHPExcel.php';
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (isset($_FILES['dataFile']['tmp_name']) && !empty($_FILES['dataFile']['tmp_name'])) {
                 $file = $_FILES['dataFile']['tmp_name'];
-                $table = $_POST['table'];
 
                 $objPHPExcel = PHPExcel_IOFactory::load($file);
                 $sheet = $objPHPExcel->getActiveSheet();
