@@ -372,11 +372,7 @@ ALTER TABLE `products`
   ADD CONSTRAINT `fk_supplier_name` FOREIGN KEY (`company`) REFERENCES `suppliers` (`name`);
 
 --
--- Các ràng buộc cho bảng `promotions`
---
-ALTER TABLE `promotions`
-  ADD CONSTRAINT `promotions_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE;
-COMMIT;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
