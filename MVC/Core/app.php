@@ -1,6 +1,6 @@
 <?php 
     class app{
-        protected $controller= 'Home';
+        protected $controller= 'home';
         protected $action='Get_data';
         protected $param=[];
         function __construct()
